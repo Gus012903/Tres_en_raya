@@ -9,6 +9,13 @@ struct RegisterView: View {
     @State private var confirmPassword = ""
     @State private var showPasswordError = false
     
+    // Constantes para los paddings
+    private let horizontalPadding: CGFloat = 25  // Padding lateral general
+    private let verticalPadding: CGFloat = 12   // Padding vertical entre secciones
+    private let fieldPadding: CGFloat = 15      // Padding interno de los campos
+    private let titleBottomPadding: CGFloat = 25 // Espacio bajo el título
+    private let buttonVerticalPadding: CGFloat = 16 // Altura del botón
+    
     private var isFormValid: Bool {
         !email.isEmpty &&
         email.contains("@") && email.contains(".") &&
@@ -27,95 +34,115 @@ struct RegisterView: View {
     
     var body: some View {
         ZStack {
-            // 1. Imagen de fondo
-            Image("Background") // Asegúrate que coincida con el nombre en Assets
+            // Imagen de fondo
+            Image("Background")
                 .resizable()
                 .scaledToFill()
-                .opacity(0.1) // Ajusta la opacidad según necesites
+                .opacity(0.1)
                 .edgesIgnoringSafeArea(.all)
             
-            // 2. Contenido principal
-            VStack(spacing: 16) {
-                Text("Registro")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(.bottom, 20)
-                    .foregroundColor(.white) // Texto claro para contrastar
-                    .shadow(color: .black, radius: 2, x: 0, y: 2) // Sombra para legibilidad
-                
-                // Campos de formulario con fondo semitransparente
-                Group {
-                    TextField("Email", text: $email)
-                        .textFieldStyle(.plain)
-                        .padding()
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                    
-                    SecureField("Contraseña (mín. 6 caracteres)", text: $password)
-                        .textFieldStyle(.plain)
-                        .padding()
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                    
-                    SecureField("Confirmar Contraseña", text: $confirmPassword)
-                        .textFieldStyle(.plain)
-                        .padding()
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                }
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .keyboardType(.emailAddress)
-                .textContentType(.emailAddress)
-                
-                if !passwordError.isEmpty {
-                    Text(passwordError)
-                        .foregroundColor(.red)
-                        .font(.caption)
-                }
-                
-                if auth.isLoading {
-                    ProgressView()
-                        .padding()
-                } else if !auth.errorMessage.isEmpty {
-                    Text(auth.errorMessage)
-                        .foregroundColor(.red)
-                        .font(.caption)
-                }
-                
-                Button(action: register) {
-                    Text("Registrarse")
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
+            // Contenido principal
+            ScrollView {
+                VStack(spacing: 25) {
+                    // Título
+                    Text("Registro")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.bottom, titleBottomPadding)
                         .foregroundColor(.white)
+                        .shadow(color: .black, radius: 2, x: 0, y: 2)
+                        .padding(.top, verticalPadding)
+                    
+                    // Campos de formulario
+                    Group {
+                        TextField("Email", text: $email)
+                            .textFieldStyle(.plain)
+                            .padding(fieldPadding)
+                            .background(Color.white.opacity(0.8))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                        
+                        SecureField("Contraseña (mín. 6 caracteres)", text: $password)
+                            .textFieldStyle(.plain)
+                            .padding(fieldPadding)
+                            .background(Color.white.opacity(0.8))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                        
+                        SecureField("Confirmar Contraseña", text: $confirmPassword)
+                            .textFieldStyle(.plain)
+                            .padding(fieldPadding)
+                            .background(Color.white.opacity(0.8))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                    }
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .keyboardType(.emailAddress)
+                    .textContentType(.emailAddress)
+                    .padding(.horizontal, horizontalPadding)
+                    
+                    // Mensajes de error
+                    if !passwordError.isEmpty {
+                        Text(passwordError)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                            .padding(.horizontal, horizontalPadding)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    
+                    if auth.isLoading {
+                        ProgressView()
+                            .padding(verticalPadding)
+                    } else if !auth.errorMessage.isEmpty {
+                        Text(auth.errorMessage)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                            .padding(.horizontal, horizontalPadding)
+                    }
+                    
+                    // Botón de registro
+                    Button(action: register) {
+                        Text("Registrarse")
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, buttonVerticalPadding)
+                            .foregroundColor(.white)
+                            .font(.headline)
+                    }
+                    .background(isFormValid ? Color.blue : Color.gray)
+                    .cornerRadius(10)
+                    .disabled(!isFormValid || auth.isLoading)
+                    .padding(.top, verticalPadding)
+                    .padding(.horizontal, horizontalPadding)
+                    .padding(.bottom, verticalPadding)
                 }
-                .background(isFormValid ? Color.blue : Color.gray)
-                .cornerRadius(10)
-                .disabled(!isFormValid || auth.isLoading)
-                .padding(.top)
+                .padding(.horizontal, horizontalPadding)
+                .padding(.top, 50)
             }
-            .padding(.horizontal, 30)
         }
         .navigationTitle("Crear Cuenta")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("Cancelar") {
                     dismiss()
                 }
+                .foregroundColor(.blue)
+                .padding(.leading, 5)
             }
+        }
+        .onAppear {
+            auth.clearErrorMessage()
         }
     }
     

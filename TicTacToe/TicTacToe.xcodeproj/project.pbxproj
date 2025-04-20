@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		90D268422DB45056003961B9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 90D268412DB45056003961B9 /* FirebaseAuth */; };
+		90E5F1E52DB5A17B0066D6DE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 90E5F1E42DB5A17B0066D6DE /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90D268422DB45056003961B9 /* FirebaseAuth in Frameworks */,
+				90E5F1E52DB5A17B0066D6DE /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +120,7 @@
 			name = TicTacToe;
 			packageProductDependencies = (
 				90D268412DB45056003961B9 /* FirebaseAuth */,
+				90E5F1E42DB5A17B0066D6DE /* FirebaseFirestore */,
 			);
 			productName = TicTacToe;
 			productReference = 90804A0C2DB061C8007272B9 /* TicTacToe.app */;
@@ -578,6 +581,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 90D268402DB45056003961B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		90E5F1E42DB5A17B0066D6DE /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90D268402DB45056003961B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

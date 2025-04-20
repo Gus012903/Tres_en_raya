@@ -21,7 +21,7 @@ struct LoginView: View {
                     .scaledToFill()
                     .frame(width: 140, height: 140)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .position(x: 215, y: 100)
+                    .position(x: 215, y: 150)
                     .opacity(1)
                 
                 
@@ -90,6 +90,7 @@ struct LoginView: View {
                     }
                 }
                 .padding(.horizontal, 50)
+                .padding(.top, 50)
             }
         }
     }
