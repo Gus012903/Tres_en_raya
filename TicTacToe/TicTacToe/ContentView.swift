@@ -5,11 +5,10 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Tic Tac Toe")
+            Text("TicTacToe")
                 .font(.largeTitle)
                 .bold()
                                 
-            
             statusText
             
             gameBoardView
@@ -18,7 +17,7 @@ struct ContentView: View {
             resetButton
                 .padding(.bottom)
         }
-        .padding(.top,-90)
+        .padding(.top,-10)
     }
     
     private var statusText: some View {
@@ -29,8 +28,8 @@ struct ContentView: View {
                         .font(.title)
                         .foregroundColor(.orange)
                 } else {
-                    Text("¡\(winner.rawValue) ha ganado!")
-                        .font(.title)
+                        Text("¡\(winner.rawValue) ha ganado!")
+                            .font(.title)
                         .foregroundColor(winner.color)
                 }
             } else {
@@ -100,6 +99,7 @@ struct CellView: View {
         )
         .animation(.easeInOut, value: isWinning)
     }
+    
 }
 
 #Preview {

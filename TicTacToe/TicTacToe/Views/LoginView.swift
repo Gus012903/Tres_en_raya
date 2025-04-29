@@ -15,17 +15,15 @@ struct LoginView: View {
                     .opacity(0.1)
                     .edgesIgnoringSafeArea(.all)
                 
-                // Logo
-                Image("Image")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 140, height: 140)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .position(x: 215, y: 150)
-                    .opacity(1)
-                
-                
                 VStack(spacing: 20) {
+                    
+                    // Logo
+                    Image("Image")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 140, height: 140)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    
                     Text("Tic Tac Toe")
                         .font(.largeTitle)
                         .bold()
@@ -90,8 +88,12 @@ struct LoginView: View {
                     }
                 }
                 .padding(.horizontal, 50)
-                .padding(.top, 50)
+                .padding(.top, -100)
             }
         }
     }
+}
+
+#Preview {
+    LoginView(auth: AuthService())
 }

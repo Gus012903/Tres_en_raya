@@ -7,13 +7,11 @@ struct RegisterView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
-    @State private var showPasswordError = false
     
-    // Constantes para los paddings
-    private let horizontalPadding: CGFloat = 25  // Padding lateral general
-    private let verticalPadding: CGFloat = 12   // Padding vertical entre secciones
-    private let fieldPadding: CGFloat = 15      // Padding interno de los campos
-    private let titleBottomPadding: CGFloat = 25 // Espacio bajo el título
+    private let horizontalPadding: CGFloat = 25     // Padding lateral general
+    private let verticalPadding: CGFloat = 12       // Padding vertical entre secciones
+    private let fieldPadding: CGFloat = 15          // Padding interno de los campos
+    private let titleBottomPadding: CGFloat = 25    // Espacio bajo el título
     private let buttonVerticalPadding: CGFloat = 16 // Altura del botón
     
     private var isFormValid: Bool {
@@ -41,8 +39,7 @@ struct RegisterView: View {
                 .opacity(0.1)
                 .edgesIgnoringSafeArea(.all)
             
-            // Contenido principal
-            ScrollView {
+            //ScrollView {
                 VStack(spacing: 25) {
                     // Título
                     Text("Registro")
@@ -53,7 +50,7 @@ struct RegisterView: View {
                         .shadow(color: .black, radius: 2, x: 0, y: 2)
                         .padding(.top, verticalPadding)
                     
-                    // Campos de formulario
+                    // Formulario
                     Group {
                         TextField("Email", text: $email)
                             .textFieldStyle(.plain)
@@ -91,7 +88,7 @@ struct RegisterView: View {
                     .textContentType(.emailAddress)
                     .padding(.horizontal, horizontalPadding)
                     
-                    // Mensajes de error
+                    
                     if !passwordError.isEmpty {
                         Text(passwordError)
                             .foregroundColor(.red)
@@ -110,7 +107,6 @@ struct RegisterView: View {
                             .padding(.horizontal, horizontalPadding)
                     }
                     
-                    // Botón de registro
                     Button(action: register) {
                         Text("Registrarse")
                             .frame(maxWidth: .infinity)
@@ -126,9 +122,9 @@ struct RegisterView: View {
                     .padding(.bottom, verticalPadding)
                 }
                 .padding(.horizontal, horizontalPadding)
-                .padding(.top, 50)
+                .padding(.top, -100)
             }
-        }
+        // }
         .navigationTitle("Crear Cuenta")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)

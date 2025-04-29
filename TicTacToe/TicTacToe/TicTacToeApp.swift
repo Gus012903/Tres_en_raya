@@ -18,15 +18,15 @@ struct TicTacToeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if auth.user != nil {
-                GameContainerView(auth: auth)
-                    .environmentObject(gameBoard)
-            } else {
-                LoginView(auth: auth)
+            NavigationStack {
+                if auth.user != nil && !auth.isLoading{
+                    GameMenuView(auth: auth)
+                }else {
+                    LoginView(auth: auth)
+                }
             }
         }
         .onChange(of: scenePhase) { _, newPhase in
-            // Notificaciones solo si hay usuario logueado
             guard auth.user != nil else { return }
             
             switch newPhase {
@@ -34,7 +34,7 @@ struct TicTacToeApp: App {
                 gameBoard.scheduleReminderNotification()
             case .active:
                 NotificationManager.shared.cancelPendingNotification()
-            @unknown default:
+            default:
                 break
             }
         }

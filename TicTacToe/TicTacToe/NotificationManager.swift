@@ -2,20 +2,14 @@ import UserNotifications
 
 class NotificationManager {
     static let shared = NotificationManager()
-    private let notificationIdentifier = "com.yourapp.tictactoe"
+    private let notificationIdentifier = "com.app.tictactoe"
     
     private init() {
         requestPermission()
     }
     
     func requestPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-            if granted {
-                print("Permiso para notificaciones concedido")
-            } else if let error = error {
-                print("Error al pedir permiso: \(error.localizedDescription)")
-            }
-        }
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
     }
     
     func scheduleGameReminder(after seconds: TimeInterval) {
@@ -38,11 +32,7 @@ class NotificationManager {
             trigger: trigger
         )
         
-        center.add(request) { error in
-            if let error = error {
-                print("Error al programar notificación: \(error.localizedDescription)")
-            }
-        }
+        center.add(request)
     }
     
     func cancelPendingNotification() {
@@ -50,4 +40,3 @@ class NotificationManager {
             .removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
     }
 }
-
