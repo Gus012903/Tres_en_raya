@@ -24,7 +24,7 @@ class FirestoreService: ObservableObject {
             "currentPlayer": "X",
             "board": Array(repeating: "", count: 9),
             "winner": "",
-            "createdAt": Timestamp(date: Date())
+            "created": Timestamp(date: Date())
         ]
         
         gameRef.setData(gameData) { [weak self] _ in
