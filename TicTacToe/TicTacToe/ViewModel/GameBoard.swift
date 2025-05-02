@@ -37,7 +37,10 @@ class GameBoard: ObservableObject {
         
         listener = db.collection("games").document(gameID)
             .addSnapshotListener { [weak self] snapshot, _ in
-                guard let self = self, let snapshot = snapshot, snapshot.exists else { return }
+                guard let self = self,
+                      let snapshot = snapshot,
+                      snapshot.exists else { return }
+                
                 self.updateGameState(from: snapshot.data())
             }
     }
