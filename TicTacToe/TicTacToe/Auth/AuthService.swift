@@ -1,4 +1,7 @@
-//Corregir el AuthService, no coincide con la arquitectura.
+//Corregir el AuthService, no coincide con la arquitectura MVVM.
+//Actualizar el código a métodos más actualizados.
+//Tener en cuenta los comentarios de Sebas para mejorar la app.
+//Probar el uso del async/await.
 
 import FirebaseAuth
 import FirebaseFirestore
