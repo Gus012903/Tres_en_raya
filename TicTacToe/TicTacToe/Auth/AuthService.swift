@@ -1,3 +1,5 @@
+//Corregir el AuthService, no coincide con la arquitectura.
+
 import FirebaseAuth
 import FirebaseFirestore
 import Combine
