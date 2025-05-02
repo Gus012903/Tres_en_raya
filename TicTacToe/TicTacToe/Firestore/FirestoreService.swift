@@ -12,7 +12,6 @@ class FirestoreService: ObservableObject {
     
     private var listener: ListenerRegistration?
     
-    private init() {}
     
     func createGame(userID: String, completion: @escaping (String?) -> Void) {
         let gameRef = db.collection("games").document()
@@ -77,11 +76,11 @@ class FirestoreService: ObservableObject {
                 let currentPlayer = data?["currentPlayer"] as? String ?? "X"
                 let winner = data?["winner"] as? String ?? ""
                 
-                DispatchQueue.main.async {
-                    self?.currentGameState.update(board: board,
-                                                  currentPlayer: currentPlayer,
-                                                  winner: winner)
-                }
+                // DispatchQueue.main.async {
+                  self?.currentGameState.update(board: board,
+                                                currentPlayer: currentPlayer,
+                                                winner: winner)
+                //}
             }
     }
     

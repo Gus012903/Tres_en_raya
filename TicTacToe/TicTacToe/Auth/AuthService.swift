@@ -51,7 +51,7 @@ class AuthService: ObservableObject {
         let userData: [String: Any] = [
             "name": email.components(separatedBy: "@").first ?? "Usuario",
             "email": email,
-            "createdAt": Timestamp(date: Date())
+            "created": Timestamp(date: Date())
         ]
         
         db.collection("users").document(uid).setData(userData) { _ in
@@ -106,7 +106,7 @@ class AuthService: ObservableObject {
             let userData: [String: Any] = [
                 "name": name ?? email.components(separatedBy: "@").first ?? "Usuario",
                 "email": email,
-                "createdAt": Timestamp(date: Date())
+                "created": Timestamp(date: Date())
             ]
             
             self?.db.collection("users").document(uid).setData(userData) { _ in
