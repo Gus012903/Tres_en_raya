@@ -19,8 +19,7 @@ class GameBoard: ObservableObject {
         cells = Array(repeating: .none, count: 9)
         currentPlayer = .x
         
-        FirestoreService.shared.$currentGameID
-            .sink { [weak self] gameID in
+        FirestoreService.shared.$currentGameID.sink { [weak self] gameID in
                 self?.gameID = gameID
                 if let gameID = gameID {
                     self?.setupGameListener(gameID: gameID)
